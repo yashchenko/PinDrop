@@ -14,6 +14,4 @@ class MapVC: UIViewController {
         
         view.backgroundColor = .green
     }
-    
-    
 }
