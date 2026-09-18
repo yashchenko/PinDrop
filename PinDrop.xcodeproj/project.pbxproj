@@ -35,6 +35,157 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA4B36CA305DF83800FF63DE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FA74CC8D305A0C3F009A3A4E /* AppDelegate.swift */,
+				FA74CC8F305A0C3F009A3A4E /* SceneDelegate.swift */,
+				FA74CC96305A0C40009A3A4E /* Assets.xcassets */,
+				FA74CC98305A0C40009A3A4E /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA4B36CC305DF87A00FF63DE /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B36CF305DF8AA00FF63DE /* UseCases */,
+				FA4B36CE305DF89C00FF63DE /* Interfaces */,
+				FA4B36CD305DF88B00FF63DE /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		FA4B36CD305DF88B00FF63DE /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		FA4B36CE305DF89C00FF63DE /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		FA4B36CF305DF8AA00FF63DE /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		FA4B36D0305DF8C800FF63DE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B36D5305DF91B00FF63DE /* Location */,
+				FA4B36D4305DF91200FF63DE /* Repositories */,
+				FA4B36D3305DF90B00FF63DE /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FA4B36D1305DF8D800FF63DE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B36D9305DF97D00FF63DE /* PlaceDetailScene */,
+				FA4B36D6305DF94200FF63DE /* MapScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		FA4B36D2305DF8EA00FF63DE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B529C305DF9FA00F12B9C /* Utilities */,
+				FA4B529B305DF9ED00F12B9C /* Extensions */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FA4B36D3305DF90B00FF63DE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FA4B36D4305DF91200FF63DE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		FA4B36D5305DF91B00FF63DE /* Location */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		FA4B36D6305DF94200FF63DE /* MapScene */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B36D8305DF96700FF63DE /* Presenter */,
+				FA4B36D7305DF96300FF63DE /* View */,
+			);
+			path = MapScene;
+			sourceTree = "<group>";
+		};
+		FA4B36D7305DF96300FF63DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FA4B36D8305DF96700FF63DE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		FA4B36D9305DF97D00FF63DE /* PlaceDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B36DB305DF99800FF63DE /* Presenter */,
+				FA4B36DA305DF99200FF63DE /* View */,
+			);
+			path = PlaceDetailScene;
+			sourceTree = "<group>";
+		};
+		FA4B36DA305DF99200FF63DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		FA4B36DB305DF99800FF63DE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		FA4B529B305DF9ED00F12B9C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FA4B529C305DF9FA00F12B9C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		FA74CC81305A0C3F009A3A4E = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +205,12 @@
 		FA74CC8C305A0C3F009A3A4E /* PinDrop */ = {
 			isa = PBXGroup;
 			children = (
-				FA74CC8D305A0C3F009A3A4E /* AppDelegate.swift */,
-				FA74CC8F305A0C3F009A3A4E /* SceneDelegate.swift */,
+				FA4B36D2305DF8EA00FF63DE /* Core */,
+				FA4B36D1305DF8D800FF63DE /* Presentation */,
+				FA4B36D0305DF8C800FF63DE /* Data */,
+				FA4B36CC305DF87A00FF63DE /* Domain */,
+				FA4B36CA305DF83800FF63DE /* App */,
 				FA74CCA5305A0D66009A3A4E /* MapVC.swift */,
-				FA74CC96305A0C40009A3A4E /* Assets.xcassets */,
-				FA74CC98305A0C40009A3A4E /* LaunchScreen.storyboard */,
 				FA74CC9B305A0C40009A3A4E /* Info.plist */,
 			);
 			path = PinDrop;
