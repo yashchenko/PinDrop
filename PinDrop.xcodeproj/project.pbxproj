@@ -12,6 +12,9 @@
 		FA74CC97305A0C40009A3A4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC96305A0C40009A3A4E /* Assets.xcassets */; };
 		FA74CC9A305A0C40009A3A4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC98305A0C40009A3A4E /* LaunchScreen.storyboard */; };
 		FA74CCA6305A0D66009A3A4E /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74CCA5305A0D66009A3A4E /* MapVC.swift */; };
+		FABC38BA3060B0D2003081A2 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */; };
+		FABC38BD3060B193003081A2 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38BC3060B193003081A2 /* LocationError.swift */; };
+		FABC38C03060B231003081A2 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38BF3060B231003081A2 /* CoreLocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		FA74CC99305A0C40009A3A4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA74CC9B305A0C40009A3A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA74CCA5305A0D66009A3A4E /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerProtocol.swift; sourceTree = "<group>"; };
+		FABC38BC3060B193003081A2 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		FABC38BF3060B231003081A2 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 		FA4B36CE305DF89C00FF63DE /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -122,6 +129,7 @@
 		FA4B36D5305DF91B00FF63DE /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				FABC38BF3060B231003081A2 /* CoreLocationManager.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 		FA4B529C305DF9FA00F12B9C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FABC38BC3060B193003081A2 /* LocationError.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -287,7 +296,10 @@
 			files = (
 				FA74CC8E305A0C3F009A3A4E /* AppDelegate.swift in Sources */,
 				FA74CCA6305A0D66009A3A4E /* MapVC.swift in Sources */,
+				FABC38BD3060B193003081A2 /* LocationError.swift in Sources */,
+				FABC38BA3060B0D2003081A2 /* LocationManagerProtocol.swift in Sources */,
 				FA74CC90305A0C3F009A3A4E /* SceneDelegate.swift in Sources */,
+				FABC38C03060B231003081A2 /* CoreLocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
