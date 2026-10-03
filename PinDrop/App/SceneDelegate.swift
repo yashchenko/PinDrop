@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = scene
         window?.rootViewController = MapVC()
         window?.makeKeyAndVisible()
+        testFoursquareRequest()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
