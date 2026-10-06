@@ -11,14 +11,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = MapVC()
+        window?.rootViewController = MapVC(coder: NSCoder())
         window?.makeKeyAndVisible()
-        testFoursquareRequest()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
