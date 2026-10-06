@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA4234E53071944A00562D0C /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4234E43071944A00562D0C /* MapPresenter.swift */; };
+		FA4234E83071949E00562D0C /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4234E73071949E00562D0C /* MapViewProtocol.swift */; };
+		FA43D8EB307312D500DE35FE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D8EA307312D500DE35FE /* MapView.swift */; };
+		FA43D8F13073168800DE35FE /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D8F03073168800DE35FE /* UIView+Ext.swift */; };
 		FA6EF23F306AD63D003D1526 /* PlaceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6EF23E306AD63D003D1526 /* PlaceMapper.swift */; };
 		FA6EF242306AD8AB003D1526 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6EF241306AD8AB003D1526 /* APIClient.swift */; };
 		FA74CC8E305A0C3F009A3A4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74CC8D305A0C3F009A3A4E /* AppDelegate.swift */; };
 		FA74CC90305A0C3F009A3A4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74CC8F305A0C3F009A3A4E /* SceneDelegate.swift */; };
 		FA74CC97305A0C40009A3A4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC96305A0C40009A3A4E /* Assets.xcassets */; };
 		FA74CC9A305A0C40009A3A4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC98305A0C40009A3A4E /* LaunchScreen.storyboard */; };
-		FA74CCA6305A0D66009A3A4E /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74CCA5305A0D66009A3A4E /* MapVC.swift */; };
+		FA9D55133074216C0027752E /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D55123074216C0027752E /* MapVC.swift */; };
 		FABC38BA3060B0D2003081A2 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */; };
 		FABC38BD3060B193003081A2 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38BC3060B193003081A2 /* LocationError.swift */; };
 		FABC38C03060B231003081A2 /* CoreLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38BF3060B231003081A2 /* CoreLocationManager.swift */; };
@@ -24,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA4234E43071944A00562D0C /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
+		FA4234E73071949E00562D0C /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
+		FA43D8EA307312D500DE35FE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FA43D8F03073168800DE35FE /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		FA6EF23E306AD63D003D1526 /* PlaceMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMapper.swift; sourceTree = "<group>"; };
 		FA6EF241306AD8AB003D1526 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		FA74CC8A305A0C3F009A3A4E /* PinDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,7 +40,7 @@
 		FA74CC96305A0C40009A3A4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA74CC99305A0C40009A3A4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA74CC9B305A0C40009A3A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA74CCA5305A0D66009A3A4E /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		FA9D55123074216C0027752E /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerProtocol.swift; sourceTree = "<group>"; };
 		FABC38BC3060B193003081A2 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
 		FABC38BF3060B231003081A2 /* CoreLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationManager.swift; sourceTree = "<group>"; };
@@ -53,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA43D8EF3073166E00DE35FE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA43D8F03073168800DE35FE /* UIView+Ext.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		FA4B36CA305DF83800FF63DE /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +180,8 @@
 		FA4B36D7305DF96300FF63DE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA43D8EA307312D500DE35FE /* MapView.swift */,
+				FA9D55123074216C0027752E /* MapVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +189,8 @@
 		FA4B36D8305DF96700FF63DE /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				FA4234E43071944A00562D0C /* MapPresenter.swift */,
+				FA4234E73071949E00562D0C /* MapViewProtocol.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -236,8 +256,8 @@
 				FA4B36D1305DF8D800FF63DE /* Presentation */,
 				FA4B36D0305DF8C800FF63DE /* Data */,
 				FA4B36CC305DF87A00FF63DE /* Domain */,
+				FA43D8EF3073166E00DE35FE /* Helpers */,
 				FA4B36CA305DF83800FF63DE /* App */,
-				FA74CCA5305A0D66009A3A4E /* MapVC.swift */,
 				FA74CC9B305A0C40009A3A4E /* Info.plist */,
 			);
 			path = PinDrop;
@@ -312,14 +332,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA43D8F13073168800DE35FE /* UIView+Ext.swift in Sources */,
 				FA6EF23F306AD63D003D1526 /* PlaceMapper.swift in Sources */,
 				FA74CC8E305A0C3F009A3A4E /* AppDelegate.swift in Sources */,
-				FA74CCA6305A0D66009A3A4E /* MapVC.swift in Sources */,
+				FA4234E53071944A00562D0C /* MapPresenter.swift in Sources */,
 				FABCD924306830BA0058CE7F /* Place.swift in Sources */,
 				FABC38BD3060B193003081A2 /* LocationError.swift in Sources */,
 				FA6EF242306AD8AB003D1526 /* APIClient.swift in Sources */,
 				FABC38BA3060B0D2003081A2 /* LocationManagerProtocol.swift in Sources */,
 				FA74CC90305A0C3F009A3A4E /* SceneDelegate.swift in Sources */,
+				FA9D55133074216C0027752E /* MapVC.swift in Sources */,
+				FA4234E83071949E00562D0C /* MapViewProtocol.swift in Sources */,
+				FA43D8EB307312D500DE35FE /* MapView.swift in Sources */,
 				FABC38C03060B231003081A2 /* CoreLocationManager.swift in Sources */,
 				FAF0A4CC306DC45400295074 /* PlaceRepository.swift in Sources */,
 				FABCD92B306838980058CE7F /* PlaceModel.swift in Sources */,
