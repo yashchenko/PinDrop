@@ -24,6 +24,7 @@
 		FABCD924306830BA0058CE7F /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD923306830BA0058CE7F /* Place.swift */; };
 		FABCD928306831960058CE7F /* PlaceRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD927306831960058CE7F /* PlaceRepositoryProtocol.swift */; };
 		FABCD92B306838980058CE7F /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD92A306838980058CE7F /* PlaceModel.swift */; };
+		FAE139F43075ECC500ABFF52 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE139F33075ECC500ABFF52 /* Fix.swift */; };
 		FAF0A4CC306DC45400295074 /* PlaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0A4CB306DC45400295074 /* PlaceRepository.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		FABCD923306830BA0058CE7F /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		FABCD927306831960058CE7F /* PlaceRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FABCD92A306838980058CE7F /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		FAE139F33075ECC500ABFF52 /* Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fix.swift; sourceTree = "<group>"; };
 		FAF0A4CB306DC45400295074 /* PlaceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 			children = (
 				FA4B529C305DF9FA00F12B9C /* Utilities */,
 				FA4B529B305DF9ED00F12B9C /* Extensions */,
+				FAE139F33075ECC500ABFF52 /* Fix.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				FA6EF23F306AD63D003D1526 /* PlaceMapper.swift in Sources */,
 				FA74CC8E305A0C3F009A3A4E /* AppDelegate.swift in Sources */,
 				FA4234E53071944A00562D0C /* MapPresenter.swift in Sources */,
+				FAE139F43075ECC500ABFF52 /* Fix.swift in Sources */,
 				FABCD924306830BA0058CE7F /* Place.swift in Sources */,
 				FABC38BD3060B193003081A2 /* LocationError.swift in Sources */,
 				FA6EF242306AD8AB003D1526 /* APIClient.swift in Sources */,
