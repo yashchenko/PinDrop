@@ -55,8 +55,21 @@ final class MapVC: UIViewController {
 
 extension MapVC: MKMapViewDelegate {
     
-    // In the future, we will be tracking a click on the pin to open the Bottom Sheet (ticket MAR-209)
-    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        mapView.deselectAnnotation(view.annotation, animated: true)
+        
+        guard let annotation = view.annotation, let id = annotation.subtitle else { return }
+        
+        guard let place = self.places.first(where: { place -> Bool in
+            place.id == id
+        }) else { return }
+        
+        let detailVC = PlaceCardVC(place: place)
+        
+        present(detailVC, animated: true)
+        
+    }
 }
 
 extension MapVC: MapViewProtocol {
@@ -95,6 +108,5 @@ extension MapVC: MapViewProtocol {
         }
     }
     
-    
-    
 }
+

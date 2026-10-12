@@ -25,6 +25,7 @@ final class MapPresenter {
     }
     
     func requestLocationAndFetchesPlaces() {
+        print("▶️ ШАГ 0: Презентер начал запрос локации")
         locationManager.requesrLocation { [weak self] result in
             
             guard let self = self else { return }
@@ -34,7 +35,9 @@ final class MapPresenter {
                 
                 case .failure(let error):
                     self.presenter?.showError("Unable to get location \(error.localizedDescription)")
+                    print("❌ ОШИБКА: Презентер не получил локацию: \(error)")
                 case .success(let coordinates):
+                    print("✅ ШАГ 2: Презентер получил координаты, начинаем загрузку из сети")
                     self.presenter?.showUserLocation(coordinates)
                     self.fetchPlaces(for: coordinates)
                     
@@ -58,7 +61,9 @@ final class MapPresenter {
                     self.presenter?.showError(error.localizedDescription)
                 
                 case .success(let places):
+                    print("🎁 ШАГ 5: Презентер передает \(places.count) мест во View!") 
                     self.presenter?.showPlaces(places)
+                    
                 }
             }
         }

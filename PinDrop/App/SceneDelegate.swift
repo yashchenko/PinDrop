@@ -12,10 +12,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        let apiClient = APIClient()
+        let apiKey = "RT0H2WXGWTP1JCH4DYU3GJ3AQZGPC50AJKU0YWZYMJVVFOPM"
+        let locationProtocol = CoreLocationManager()
+        let repo: PlaceRepository = PlaceRepository(api: apiClient, apiKey: apiKey)
+        let presenter = MapPresenter(location: locationProtocol, placeRepo: repo)
+        let mapVC = MapVC(presenter: presenter)
+        
+        presenter.presenter = mapVC
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = MapVC(coder: NSCoder())
+        window?.rootViewController = mapVC
         window?.makeKeyAndVisible()
     }
 

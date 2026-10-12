@@ -61,22 +61,47 @@ extension CoreLocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         guard let location = locations.last else { return }
+        print("📍 ШАГ 1: CoreLocation успешно получил координаты: \(location.coordinate)")
         completion?(.success(location.coordinate))
         self.completion = nil // we release the closure to avoid memory leaks
     }
     
     // gps unavailable, etc
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        if let clError = error as? CLError, clError.code == .denied {
+    
+    // Ошибка: GPS недоступен и т.д.
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             
-            completion?(.failure(.denied))
+            if let clError = error as? CLError {
+                // ВАЖНО: Игнорируем временную ошибку симулятора
+                if clError.code == .locationUnknown {
+                    print("⚠️ CoreLocation: Симулятор ищет спутники, ждем...")
+                    return
+                }
+                
+                if clError.code == .denied {
+                    completion?(.failure(.denied))
+                } else {
+                    completion?(.failure(.unknown))
+                }
+            } else {
+                completion?(.failure(.unknown))
+            }
             
-        } else {
-            
-            completion?(.failure(.unknown))
+            // Уничтожаем замыкание только если это реальная фатальная ошибка
+            self.completion = nil
         }
-        
-        self.completion = nil
-    }
+    
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//
+//        if let clError = error as? CLError, clError.code == .denied {
+//
+//            completion?(.failure(.denied))
+//
+//        } else {
+//
+//            completion?(.failure(.unknown))
+//        }
+//
+//        self.completion = nil
+//    }
 }
