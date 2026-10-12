@@ -17,6 +17,7 @@
 		FA74CC90305A0C3F009A3A4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA74CC8F305A0C3F009A3A4E /* SceneDelegate.swift */; };
 		FA74CC97305A0C40009A3A4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC96305A0C40009A3A4E /* Assets.xcassets */; };
 		FA74CC9A305A0C40009A3A4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA74CC98305A0C40009A3A4E /* LaunchScreen.storyboard */; };
+		FA7F48D430772FD100D782D8 /* PlaceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F48D330772FD100D782D8 /* PlaceDetailVC.swift */; };
 		FA9D55133074216C0027752E /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D55123074216C0027752E /* MapVC.swift */; };
 		FABC38BA3060B0D2003081A2 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */; };
 		FABC38BD3060B193003081A2 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC38BC3060B193003081A2 /* LocationError.swift */; };
@@ -40,6 +41,7 @@
 		FA74CC96305A0C40009A3A4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA74CC99305A0C40009A3A4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA74CC9B305A0C40009A3A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA7F48D330772FD100D782D8 /* PlaceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailVC.swift; sourceTree = "<group>"; };
 		FA9D55123074216C0027752E /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		FABC38B93060B0D2003081A2 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerProtocol.swift; sourceTree = "<group>"; };
 		FABC38BC3060B193003081A2 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		FA4B36DA305DF99200FF63DE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA7F48D330772FD100D782D8 /* PlaceDetailVC.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			files = (
 				FA43D8F13073168800DE35FE /* UIView+Ext.swift in Sources */,
 				FA6EF23F306AD63D003D1526 /* PlaceMapper.swift in Sources */,
+				FA7F48D430772FD100D782D8 /* PlaceDetailVC.swift in Sources */,
 				FA74CC8E305A0C3F009A3A4E /* AppDelegate.swift in Sources */,
 				FA4234E53071944A00562D0C /* MapPresenter.swift in Sources */,
 				FABCD924306830BA0058CE7F /* Place.swift in Sources */,
