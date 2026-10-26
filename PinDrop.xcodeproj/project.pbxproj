@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0A314230840D5D0040A9FA /* CoreDataStackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A314130840D5D0040A9FA /* CoreDataStackProtocol.swift */; };
 		FA4234E53071944A00562D0C /* MapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4234E43071944A00562D0C /* MapPresenter.swift */; };
 		FA4234E83071949E00562D0C /* MapViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4234E73071949E00562D0C /* MapViewProtocol.swift */; };
 		FA43D8EB307312D500DE35FE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D8EA307312D500DE35FE /* MapView.swift */; };
@@ -25,10 +26,13 @@
 		FABCD924306830BA0058CE7F /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD923306830BA0058CE7F /* Place.swift */; };
 		FABCD928306831960058CE7F /* PlaceRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD927306831960058CE7F /* PlaceRepositoryProtocol.swift */; };
 		FABCD92B306838980058CE7F /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD92A306838980058CE7F /* PlaceModel.swift */; };
+		FAC3AFF73082E56100A7B7F5 /* FavouritePlaceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3AFF63082E56100A7B7F5 /* FavouritePlaceEntity.swift */; };
+		FAC3AFFB3082FD8300A7B7F5 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3AFFA3082FD8300A7B7F5 /* CoreDataStack.swift */; };
 		FAF0A4CC306DC45400295074 /* PlaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0A4CB306DC45400295074 /* PlaceRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA0A314130840D5D0040A9FA /* CoreDataStackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackProtocol.swift; sourceTree = "<group>"; };
 		FA4234E43071944A00562D0C /* MapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPresenter.swift; sourceTree = "<group>"; };
 		FA4234E73071949E00562D0C /* MapViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewProtocol.swift; sourceTree = "<group>"; };
 		FA43D8EA307312D500DE35FE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		FABCD923306830BA0058CE7F /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		FABCD927306831960058CE7F /* PlaceRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRepositoryProtocol.swift; sourceTree = "<group>"; };
 		FABCD92A306838980058CE7F /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		FAC3AFF63082E56100A7B7F5 /* FavouritePlaceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlaceEntity.swift; sourceTree = "<group>"; };
+		FAC3AFFA3082FD8300A7B7F5 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FAF0A4CB306DC45400295074 /* PlaceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +144,7 @@
 		FA4B36D2305DF8EA00FF63DE /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FAC3AFF53082E54D00A7B7F5 /* CoreData */,
 				FA4B529C305DF9FA00F12B9C /* Utilities */,
 				FA4B529B305DF9ED00F12B9C /* Extensions */,
 			);
@@ -266,6 +273,16 @@
 			path = PinDrop;
 			sourceTree = "<group>";
 		};
+		FAC3AFF53082E54D00A7B7F5 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FAC3AFF63082E56100A7B7F5 /* FavouritePlaceEntity.swift */,
+				FAC3AFFA3082FD8300A7B7F5 /* CoreDataStack.swift */,
+				FA0A314130840D5D0040A9FA /* CoreDataStackProtocol.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -347,9 +364,12 @@
 				FA74CC90305A0C3F009A3A4E /* SceneDelegate.swift in Sources */,
 				FA9D55133074216C0027752E /* MapVC.swift in Sources */,
 				FA4234E83071949E00562D0C /* MapViewProtocol.swift in Sources */,
+				FAC3AFF73082E56100A7B7F5 /* FavouritePlaceEntity.swift in Sources */,
 				FA43D8EB307312D500DE35FE /* MapView.swift in Sources */,
+				FAC3AFFB3082FD8300A7B7F5 /* CoreDataStack.swift in Sources */,
 				FABC38C03060B231003081A2 /* CoreLocationManager.swift in Sources */,
 				FAF0A4CC306DC45400295074 /* PlaceRepository.swift in Sources */,
+				FA0A314230840D5D0040A9FA /* CoreDataStackProtocol.swift in Sources */,
 				FABCD92B306838980058CE7F /* PlaceModel.swift in Sources */,
 				FABCD928306831960058CE7F /* PlaceRepositoryProtocol.swift in Sources */,
 			);
