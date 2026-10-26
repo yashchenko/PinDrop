@@ -53,10 +53,7 @@ final class PlaceRepository: PlaceRepositoryProtocol {
 //
 //    }
     
-    func fetchNearByPlaces(
-            coordinate: CLLocationCoordinate2D,
-        comletion completion: @escaping (Result<[Place], LocationError>) -> Void
-        ) {
+    func fetchNearByPlaces(coordinate: CLLocationCoordinate2D, comletion completion: @escaping (Result<[Place], LocationError>) -> Void) {
             // Используем новый рабочий URL
             var components = URLComponents(string: "https://places-api.foursquare.com/places/search")
             
