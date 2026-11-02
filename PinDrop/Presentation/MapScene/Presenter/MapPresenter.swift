@@ -13,6 +13,7 @@ final class MapPresenter {
     
     private let locationManager: LocationManagerProtocol
     private let placeRepo: PlaceRepositoryProtocol
+    private var favouriteIDs: Set<String> = []
     
     init(location: LocationManagerProtocol, placeRepo: PlaceRepositoryProtocol) {
         self.locationManager = location
@@ -21,8 +22,66 @@ final class MapPresenter {
     
     func viewDidLoad() {
         
+        loadFavourites()
         requestLocationAndFetchesPlaces()
     }
+    
+    func isFavourite(_ place: Place) -> Bool {
+        
+        return favouriteIDs.contains(place.id)
+        
+    }
+    
+    func toggleFavourite(place: Place) {
+        
+        if isFavourite(place) {
+            
+            placeRepo.deleteFavourite(id: place.id) { [weak self] result in
+                
+                guard let self = self else { return }
+                
+                switch result {
+                
+                case .failure(let error):
+                    
+                    self.presenter?.showError(error.localizedDescription)
+                    
+                case .success(()):
+                    
+                    self.favouriteIDs.remove(place.id)
+                
+                }
+        
+            }
+        } else {
+            
+            
+            self.placeRepo.saveFavourite(place) { [weak self] result in
+                
+                guard let self = self else { return }
+                
+                switch result {
+
+                case .failure(let error):
+                    
+                    self.presenter?.showError(error.localizedDescription)
+
+
+                case .success(()):
+
+                    self.favouriteIDs.insert(place.id)
+                    
+                print("toggle fav success")
+                    
+                }
+            }
+    
+        }
+    }
+    
+    
+    
+    
     
     func requestLocationAndFetchesPlaces() {
         print("▶️ ШАГ 0: Презентер начал запрос локации")
@@ -68,4 +127,27 @@ final class MapPresenter {
             }
         }
     }
+    
+    
+    private func loadFavourites() {
+        
+        placeRepo.fetchFavourites { [weak self] resukt in
+            guard let self = self else { return }
+                
+                switch resukt {
+                
+                case .failure(let error):
+                    print(error.localizedDescription)
+                
+                case .success(let places):
+                
+                    let iDs = places.map { place -> String in
+                        return place.id
+                    }
+                    
+                    self.favouriteIDs = Set(iDs)
+                }
+                
+            }
+        }
 }

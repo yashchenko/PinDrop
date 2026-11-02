@@ -13,7 +13,7 @@ final class MapVC: UIViewController {
     private let customView = MapView()
     private let presenter: MapPresenter
     
-    private var places: [Place] = []
+    var places: [Place] = []
     
     init(presenter: MapPresenter) {
         self.presenter = presenter
@@ -65,7 +65,12 @@ extension MapVC: MKMapViewDelegate {
             place.id == id
         }) else { return }
         
-        let detailVC = PlaceCardVC(place: place)
+        let detailVC = PlaceCardVC(place: place, isFavourite: presenter.isFavourite(place))
+        detailVC.didFavouriteTapped = { [weak self] in
+            
+            self?.presenter.toggleFavourite(place: place)
+            
+        }
         
         present(detailVC, animated: true)
         

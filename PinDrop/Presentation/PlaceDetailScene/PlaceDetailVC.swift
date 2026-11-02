@@ -14,6 +14,10 @@ class PlaceCardVC: UIViewController {
     
     private var containerBottomConstraint: NSLayoutConstraint!
     
+    private var isFavourite: Bool
+    
+    var didFavouriteTapped: (() -> ())?
+    
     // MARK: - UI
     
     // just dim the map
@@ -63,8 +67,18 @@ class PlaceCardVC: UIViewController {
         return button
     }()
     
-    init(place: Place) {
+    private let favouriteButton: UIButton = {
+       
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .secondaryLabel
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    init(place: Place, isFavourite: Bool) {
         self.place = place
+        self.isFavourite = isFavourite
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .overFullScreen
     }
@@ -81,6 +95,7 @@ class PlaceCardVC: UIViewController {
         setupData()
         setupUI()
         setupGestures()
+        updateFavouriteButtonState()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,12 +108,26 @@ class PlaceCardVC: UIViewController {
     
     // MARK: - Setup
     
+    private func updateFavouriteButtonState() {
+        
+        let iconName = isFavourite ? "heart.fill" : "heart"
+        favouriteButton.setImage(UIImage(systemName: iconName), for: .normal)
+        favouriteButton.tintColor = isFavourite ? .systemRed : .secondaryLabel
+    }
+    
+    @objc private func didTapFavourite() {
+        isFavourite.toggle()
+        updateFavouriteButtonState()
+        didFavouriteTapped?()
+        
+    }
+    
     private func setupUI() {
         
         view.backgroundColor = .clear
         
         view.addSubviews(views: [dimmingView, containerView])
-        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton])
+        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton, favouriteButton])
         
         let cardHeight: CGFloat = 300
         
@@ -122,7 +151,7 @@ class PlaceCardVC: UIViewController {
             // Заголовок
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-            titleLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -16),
+            titleLabel.trailingAnchor.constraint(equalTo: favouriteButton.leadingAnchor, constant: -12),
             
             // Категория
             categoryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
@@ -133,7 +162,12 @@ class PlaceCardVC: UIViewController {
             closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24),
             closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             closeButton.widthAnchor.constraint(equalToConstant: 30),
-            closeButton.heightAnchor.constraint(equalToConstant: 30)
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            favouriteButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
+            favouriteButton.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -12),
+            favouriteButton.widthAnchor.constraint(equalToConstant: 30),
+            favouriteButton.heightAnchor.constraint(equalToConstant: 30)
         ])
         
     }
@@ -148,6 +182,7 @@ class PlaceCardVC: UIViewController {
         
         // close with X button
         closeButton.addTarget(self, action: #selector(animateHideAndDismiss), for: .touchUpInside)
+        favouriteButton.addTarget(self, action: #selector(didTapFavourite), for: .touchUpInside)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(animateHideAndDismiss))
         dimmingView.addGestureRecognizer(tapGesture)
