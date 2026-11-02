@@ -12,4 +12,6 @@ protocol CoreDataStackProtocol: AnyObject {
     func saveFavourite(_ place: Place, completion: @escaping (Result<Void, Error>) -> Void)
     
     func fetchFavourite(completion: @escaping (Result<[Place], Error>) -> Void )
+    
+    func deleteFavourites(id: String, completion: @escaping (Result<Void, Error>) -> Void)
 }

@@ -105,6 +105,43 @@ class CoreDataStack: CoreDataStackProtocol {
         
     }
     
+    func deleteFavourites(id: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        container.performBackgroundTask { context in
+            
+            let request: NSFetchRequest<FavouritePlaceEntity> = FavouritePlaceEntity.fetchRequest()
+            
+            request.predicate = NSPredicate(format: "id == %@", id)
+            
+            do {
+                
+                let results = try context.fetch(request)
+                results.forEach { entity in
+                    context.delete(entity)
+                }
+                
+                if context.hasChanges {
+                    
+                    try context.save()
+    
+                }
+                
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
+                
+            } catch {
+                
+
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+            
+            
+            
+        }
+    }
+    
     
     private static func buildModel() -> NSManagedObjectModel {
         let model = NSManagedObjectModel()

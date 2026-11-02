@@ -14,9 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         let apiClient = APIClient()
+        let coreDataStack = CoreDataStack()
         let apiKey = "RT0H2WXGWTP1JCH4DYU3GJ3AQZGPC50AJKU0YWZYMJVVFOPM"
         let locationProtocol = CoreLocationManager()
-        let repo: PlaceRepository = PlaceRepository(api: apiClient, apiKey: apiKey)
+        let repo: PlaceRepository = PlaceRepository(api: apiClient, apiKey: apiKey, coreData: coreDataStack)
         let presenter = MapPresenter(location: locationProtocol, placeRepo: repo)
         let mapVC = MapVC(presenter: presenter)
         
