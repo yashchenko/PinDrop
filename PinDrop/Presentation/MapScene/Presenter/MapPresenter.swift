@@ -15,6 +15,9 @@ final class MapPresenter {
     private let placeRepo: PlaceRepositoryProtocol
     private var favouriteIDs: Set<String> = []
     
+    private var userCoordinate: CLLocationCoordinate2D?
+    private var searchWorkItem: DispatchWorkItem?
+    
     init(location: LocationManagerProtocol, placeRepo: PlaceRepositoryProtocol) {
         self.locationManager = location
         self.placeRepo = placeRepo
@@ -99,6 +102,7 @@ final class MapPresenter {
                     print("✅ ШАГ 2: Презентер получил координаты, начинаем загрузку из сети")
                     self.presenter?.showUserLocation(coordinates)
                     self.fetchPlaces(for: coordinates)
+                    self.userCoordinate = coordinates
                     
                 }
             }
@@ -150,4 +154,44 @@ final class MapPresenter {
                 
             }
         }
+    
+    func searchQueryChanged(_ query: String) {
+        searchWorkItem?.cancel()
+        
+        let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !trimmedQuery.isEmpty, let coordinate = userCoordinate else {
+            
+            presenter?.searchQuerySuggestions([])
+            
+            return
+        }
+        
+        let workingItem = DispatchWorkItem { [weak self] in
+            
+            guard let self = self else { return }
+            
+            self.placeRepo.searchPlaces(query: trimmedQuery, coordinate: coordinate) { result in
+                
+                
+                DispatchQueue.main.async {
+                    
+                    switch result {
+                    
+                    case .failure(let error):
+                        
+                        self.presenter?.showError(error.localizedDescription)
+                        
+                    case .success(let places):
+                        self.presenter?.searchQuerySuggestions(places)
+                    
+                    }
+                }
+            }
+        }
+        
+        searchWorkItem = workingItem
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workingItem)
+    }
 }

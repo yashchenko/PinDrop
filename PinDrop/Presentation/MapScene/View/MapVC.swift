@@ -10,10 +10,17 @@ import MapKit
 
 final class MapVC: UIViewController {
 
+    // MARK: - Properties
+    
     private let customView = MapView()
     private let presenter: MapPresenter
     
     var places: [Place] = []
+    
+    var suggestedPlaces: [Place] = []
+    
+    
+    // MARK: - Init
     
     init(presenter: MapPresenter) {
         self.presenter = presenter
@@ -23,6 +30,8 @@ final class MapVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Lifecycle
     
     override func loadView() {
         view = customView
@@ -34,12 +43,21 @@ final class MapVC: UIViewController {
         presenter.viewDidLoad()
         setupActions()
         customView.mapKitView.delegate = self
+        customView.searchTextField.delegate = self
+        customView.suggestionsTableView.delegate = self
+        customView.suggestionsTableView.dataSource = self
+        customView.suggestionsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SuggestionCell")
+        
+        
     }
 
+    // MARK: - Methods
     
     private func setupActions() {
         
         customView.locationButton.addTarget(self, action: #selector(centerMapOnUser), for: .touchUpInside)
+        
+        customView.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
     }
     
     @objc func centerMapOnUser() {
@@ -49,6 +67,11 @@ final class MapVC: UIViewController {
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         customView.mapKitView.setRegion(region, animated: true)
         
+    }
+    
+    @objc func searchTextChanged(_ textField: UITextField) {
+        
+        presenter.searchQueryChanged(textField.text ?? "")
     }
 }
 
@@ -113,5 +136,81 @@ extension MapVC: MapViewProtocol {
         }
     }
     
+    func searchQuerySuggestions(_ places: [Place]) {
+        
+        self.suggestedPlaces = places
+        customView.suggestionsTableView.isHidden = places.isEmpty
+        customView.suggestionsTableView.reloadData()
+        
+    }
+    
 }
 
+
+extension MapVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+    
+     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return suggestedPlaces.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SuggestionCell", for: indexPath)
+        
+        let place = suggestedPlaces[indexPath.row]
+        
+        cell.textLabel?.text = "\(place.name)•\(place.category)"
+        
+        cell.textLabel?.font = .systemFont(ofSize: 14)
+        
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedPlace = suggestedPlaces[indexPath.row]
+        
+        customView.suggestionsTableView.isHidden = true
+        customView.searchTextField.text = selectedPlace.name
+        customView.searchTextField.resignFirstResponder()
+        
+        showPlaces([selectedPlace])
+        
+        showUserLocation(selectedPlace.coordinates)
+        
+        let detailVC = PlaceCardVC(place: selectedPlace, isFavourite: presenter.isFavourite(selectedPlace))
+        detailVC.didFavouriteTapped = { [weak self] in
+            
+            self?.presenter.toggleFavourite(place: selectedPlace)
+            
+        }
+    
+        present(detailVC, animated: true)
+        
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        
+        suggestedPlaces = []
+        customView.suggestionsTableView.isHidden = true
+        customView.suggestionsTableView.reloadData()
+        return true
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        customView.suggestionsTableView.isHidden = true
+        return true
+        
+        
+    }
+    
+}
