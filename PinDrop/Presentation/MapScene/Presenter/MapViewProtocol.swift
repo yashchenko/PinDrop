@@ -14,4 +14,6 @@ protocol MapViewProtocol: AnyObject {
     func showPlaces(_ place: [Place])
     
     func showError(_ error: String)
+    
+    func searchQuerySuggestions(_ places: [Place])
 }

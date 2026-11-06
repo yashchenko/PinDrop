@@ -16,4 +16,6 @@ protocol PlaceRepositoryProtocol {
     func deleteFavourite(id: String, completion: @escaping (Result<Void, Error>) -> Void)
     
     func fetchFavourites(completion: @escaping (Result<[Place], Error>) -> Void)
+    
+    func searchPlaces(query: String, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<[Place], LocationError>) -> Void)
 }

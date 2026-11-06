@@ -42,21 +42,30 @@ final class MapView: UIView {
         view.layer.shadowOffset = CGSize(width: 0, height: 2)
         view.layer.shadowRadius = 4
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        let label = UILabel()
-        label.text = "Search places..."
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        ])
-        
         return view
     }()
+    
+    let searchTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Search places..."
+        textField.font = .systemFont(ofSize: 15)
+        textField.clearButtonMode = .whileEditing
+        textField.returnKeyType = .search
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let suggestionsTableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .systemBackground
+        table.isHidden = true
+        table.layer.cornerRadius = 16
+        table.tableFooterView = UIView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,7 +79,8 @@ final class MapView: UIView {
     
     func setupUI() {
         
-        let arrayViews = [mapKitView, locationButton, searchBarContainer]
+        let arrayViews = [mapKitView, locationButton, searchBarContainer, suggestionsTableView]
+        searchBarContainer.addSubview(searchTextField)
         addSubviews(views: arrayViews)
         
         NSLayoutConstraint.activate([
@@ -84,6 +94,15 @@ final class MapView: UIView {
             searchBarContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             searchBarContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             searchBarContainer.heightAnchor.constraint(equalToConstant: 50),
+            
+            searchTextField.leadingAnchor.constraint(equalTo: searchBarContainer.leadingAnchor, constant: 16),
+            searchTextField.trailingAnchor.constraint(equalTo: searchBarContainer.trailingAnchor, constant: -16),
+            searchTextField.centerYAnchor.constraint(equalTo: searchBarContainer.centerYAnchor),
+            
+            suggestionsTableView.topAnchor.constraint(equalTo: searchBarContainer.bottomAnchor, constant: 8),
+            suggestionsTableView.leadingAnchor.constraint(equalTo: searchBarContainer.leadingAnchor),
+            suggestionsTableView.trailingAnchor.constraint(equalTo: searchBarContainer.trailingAnchor),
+            suggestionsTableView.heightAnchor.constraint(equalToConstant: 220),
             
             // button (50x50)
             locationButton.widthAnchor.constraint(equalToConstant: 50),

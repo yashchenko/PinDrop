@@ -51,7 +51,7 @@ final class PlaceRepository: PlaceRepositoryProtocol {
                 case .success(let response):
                     print("✅ ШАГ 4: Репозиторий успешно скачал и распарсил данные!")
                     // Маппинг DTO в Domain модель
-                    let places = response.results.map(PlaceMapper.map)
+                    let places = response.results.map(PlaceMapper.convert)
                     completion(.success(places))
                 case .failure(let error):
                     print("❌ ОШИБКА ШАГ 4: Репозиторий упал с ошибкой: \(error)")
@@ -81,4 +81,44 @@ final class PlaceRepository: PlaceRepositoryProtocol {
     }
    
     
+    func searchPlaces(query: String, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<[Place], LocationError>) -> Void) {
+        var components = URLComponents(string: "https://places-api.foursquare.com/places/search")
+        
+        components?.queryItems = [
+        
+            URLQueryItem(name: "query", value: query),
+            URLQueryItem(name: "ll", value: "\(coordinate.latitude),\(coordinate.longitude)"),
+            URLQueryItem(name: "limit", value: "5")
+        ]
+        
+        guard let url = components?.url else {
+            
+            completion(.failure(.denied))
+            return
+        
+        }
+        
+        let headers = [
+        
+            "Authorization": "Bearer \(apiKey)",
+            "X-Places-Api-Version": "2025-06-17",
+            "Accept": "application/json"
+        ]
+        
+        apiClient.request(url: url, headers: headers) { (result: Result<PlaceSearchResponse, ApiError>) in
+            
+            switch result {
+            
+            case .failure:
+                completion(.failure(.restricted))
+            
+            case .success(let response):
+                
+                let places = response.results.map { rawPlace in
+                    return PlaceMapper.convert(rawPlace)
+                }
+                completion(.success(places))
+            }
+        }
+    }
 }
