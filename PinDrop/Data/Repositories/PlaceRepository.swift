@@ -9,9 +9,13 @@ import CoreLocation
 
 final class PlaceRepository: PlaceRepositoryProtocol {
     
+    // MARK: - Properties
+    
     private let apiClient: ApiClientProtocol
     private let apiKey: String
     private let coreData: CoreDataStackProtocol
+    
+    // MARK: - Init
     
     init(api: ApiClientProtocol, apiKey: String, coreData: CoreDataStackProtocol) {
         self.apiClient = api
@@ -121,4 +125,37 @@ final class PlaceRepository: PlaceRepositoryProtocol {
             }
         }
     }
+    
+    func fetchPlaceSetails(id: String, copletion: @escaping (Result<Place, LocationError>) -> Void) {
+        guard let url = URL(string: "https://places-api.foursquare.com/places/\(id)") else {
+            
+            copletion (.failure(.denied))
+            return
+            
+        }
+        
+        let headers = [
+            
+            "Authorization": "Bearer \(apiKey)",
+            "X-Places-Api-Version": "2025-06-17",
+            "Accept": "application/json"
+            
+        ]
+        
+        apiClient.request(url: url, headers: headers) { (result: Result<PlaceModel, ApiError>) in
+            switch result {
+            
+            case .failure:
+                copletion(.failure(.restricted))
+                
+            case .success(let response):
+                
+                let place = PlaceMapper.convert(response)
+                copletion (.success(place))
+            }
+        }
+    }
+    
+    
+    
 }

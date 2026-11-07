@@ -144,6 +144,11 @@ extension MapVC: MapViewProtocol {
         
     }
     
+    func focusOnPlace(_ coordinate: CLLocationCoordinate2D) {
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
+        customView.mapKitView.setRegion(region, animated: true)
+    }
+    
 }
 
 
@@ -184,14 +189,16 @@ extension MapVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
         
         showUserLocation(selectedPlace.coordinates)
         
-        let detailVC = PlaceCardVC(place: selectedPlace, isFavourite: presenter.isFavourite(selectedPlace))
-        detailVC.didFavouriteTapped = { [weak self] in
-            
-            self?.presenter.toggleFavourite(place: selectedPlace)
-            
-        }
-    
-        present(detailVC, animated: true)
+//        let detailVC = PlaceCardVC(place: selectedPlace, isFavourite: presenter.isFavourite(selectedPlace))
+//        detailVC.didFavouriteTapped = { [weak self] in
+//
+//            self?.presenter.toggleFavourite(place: selectedPlace)
+//
+//        }
+//
+//        present(detailVC, animated: true)
+        
+        presenter.didSelectSearchSuggestion(selectedPlace)
         
     }
     
@@ -206,8 +213,12 @@ extension MapVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textField.resignFirstResponder()
+        suggestedPlaces = []
+        
+       // textField.resignFirstResponder()
         customView.suggestionsTableView.isHidden = true
+        customView.suggestionsTableView.reloadData()
+        presenter.didClearSearch()
         return true
         
         
