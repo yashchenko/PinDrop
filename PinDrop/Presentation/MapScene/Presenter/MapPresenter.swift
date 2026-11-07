@@ -194,4 +194,49 @@ final class MapPresenter {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workingItem)
     }
+    
+    func didSelectSearchSuggestion(_ place: Place) {
+        
+        searchWorkItem?.cancel()
+        
+        presenter?.searchQuerySuggestions([])
+        
+        placeRepo.fetchPlaceSetails(id: place.id) { [weak self] result in
+            
+            DispatchQueue.main.async {
+                
+                switch result {
+                
+                case .failure:
+                    
+                    self?.presenter?.showPlaces([place])
+                    self?.presenter?.focusOnPlace(place.coordinates)
+                
+                    
+                case .success(let detailedPlace):
+                    
+                    self?.presenter?.showPlaces([detailedPlace])
+                    self?.presenter?.focusOnPlace(detailedPlace.coordinates)
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    func didClearSearch() {
+        
+        searchWorkItem?.cancel()
+        presenter?.searchQuerySuggestions([])
+        
+        if let coordinate = userCoordinate {
+            
+            fetchPlaces(for: coordinate)
+            presenter?.showUserLocation(coordinate)
+            
+        }
+        
+    }
 }

@@ -18,4 +18,6 @@ protocol PlaceRepositoryProtocol {
     func fetchFavourites(completion: @escaping (Result<[Place], Error>) -> Void)
     
     func searchPlaces(query: String, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<[Place], LocationError>) -> Void)
+    
+    func fetchPlaceSetails(id: String, copletion: @escaping (Result<Place, LocationError>) -> Void)
 }

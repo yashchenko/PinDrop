@@ -16,4 +16,6 @@ protocol MapViewProtocol: AnyObject {
     func showError(_ error: String)
     
     func searchQuerySuggestions(_ places: [Place])
+    
+    func focusOnPlace(_ coordinate: CLLocationCoordinate2D)
 }
