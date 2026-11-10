@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 protocol PlaceRepositoryProtocol {
     
@@ -20,4 +21,6 @@ protocol PlaceRepositoryProtocol {
     func searchPlaces(query: String, coordinate: CLLocationCoordinate2D, completion: @escaping (Result<[Place], LocationError>) -> Void)
     
     func fetchPlaceSetails(id: String, copletion: @escaping (Result<Place, LocationError>) -> Void)
+    
+    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKPolyline, Error>) -> Void)
 }

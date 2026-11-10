@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 final class MapPresenter {
     
@@ -238,5 +239,30 @@ final class MapPresenter {
             
         }
         
+    }
+    
+    func requestRoute(to destination: Place) {
+        
+        guard let sourceCoordinate = userCoordinate else {
+            
+            presenter?.showError("User location is unavailable")
+            return
+        }
+        
+        placeRepo.calculateRoute(from: sourceCoordinate, to: destination.coordinates) { (result) in
+            
+            
+            DispatchQueue.main.async {
+                
+                switch result {
+                case .failure(let error):
+                    self.presenter?.showError(error.localizedDescription)
+                    
+                    
+                case .success(let polylines):
+                    self.presenter?.drawRoute(polylines)
+                }
+            }
+        }
     }
 }

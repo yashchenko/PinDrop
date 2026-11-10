@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 protocol MapViewProtocol: AnyObject {
     
@@ -18,4 +19,6 @@ protocol MapViewProtocol: AnyObject {
     func searchQuerySuggestions(_ places: [Place])
     
     func focusOnPlace(_ coordinate: CLLocationCoordinate2D)
+    
+    func drawRoute(_ polyline: MKPolyline)
 }
