@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 final class PlaceRepository: PlaceRepositoryProtocol {
     
@@ -156,6 +157,38 @@ final class PlaceRepository: PlaceRepositoryProtocol {
         }
     }
     
+    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKPolyline, Error>) -> Void) {
+        
+        let sourcePlacemark = MKPlacemark(coordinate: source)
+        let destinationPlacemark = MKPlacemark(coordinate: destination)
+        
+        let request = MKDirections.Request()
+        
+        request.source = MKMapItem(placemark: sourcePlacemark)
+        request.destination = MKMapItem(placemark: destinationPlacemark)
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { response, error in
+        
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let route = response?.routes.first else {
+                
+                completion(.failure(ApiError.noData))
+                return
+            }
+            
+            completion(.success(route.polyline))
+            
+        }
+        
+        
+    }
     
     
 }

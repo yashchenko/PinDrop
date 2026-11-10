@@ -95,7 +95,26 @@ extension MapVC: MKMapViewDelegate {
             
         }
         
+        detailVC.didDirectionTapped = { [weak self] in
+            
+            self?.presenter.requestRoute(to: place)
+            
+        }
+        
         present(detailVC, animated: true)
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        if let polyline = overlay as? MKPolyline {
+            let render = MKPolylineRenderer(polyline: polyline)
+            render.strokeColor = .systemBlue
+            render.lineWidth = 5
+            return render
+        }
+        
+        return MKOverlayRenderer(overlay: overlay)
         
     }
 }
@@ -148,6 +167,16 @@ extension MapVC: MapViewProtocol {
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 300, longitudinalMeters: 300)
         customView.mapKitView.setRegion(region, animated: true)
     }
+    
+    func drawRoute(_ polyline: MKPolyline) {
+        customView.mapKitView.removeOverlays(customView.mapKitView.overlays)
+        customView.mapKitView.addOverlay(polyline)
+        
+        let edgePaddings = UIEdgeInsets(top: 100, left: 40, bottom: 60, right: 40)
+        customView.mapKitView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgePaddings, animated: true)
+        
+    }
+    
     
 }
 
@@ -204,6 +233,8 @@ extension MapVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
+        customView.mapKitView.removeOverlays(customView.mapKitView.overlays)
+        
         suggestedPlaces = []
         customView.suggestionsTableView.isHidden = true
         customView.suggestionsTableView.reloadData()
@@ -214,6 +245,8 @@ extension MapVC: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         suggestedPlaces = []
+        
+        customView.mapKitView.removeOverlays(customView.mapKitView.overlays)
         
        // textField.resignFirstResponder()
         customView.suggestionsTableView.isHidden = true

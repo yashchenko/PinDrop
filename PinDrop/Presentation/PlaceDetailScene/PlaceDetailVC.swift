@@ -9,6 +9,7 @@ import UIKit
 
 class PlaceCardVC: UIViewController {
     
+    // MARK: - Properties
     
     private let place: Place
     
@@ -17,6 +18,9 @@ class PlaceCardVC: UIViewController {
     private var isFavourite: Bool
     
     var didFavouriteTapped: (() -> ())?
+    
+    var didDirectionTapped: (() -> ())?
+    
     
     // MARK: - UI
     
@@ -76,6 +80,18 @@ class PlaceCardVC: UIViewController {
         return button
     }()
     
+    private let directionsButton: UIButton = {
+       
+        let button = UIButton(type: .system)
+        button.setTitle("Get direction", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .bold)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 16
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(place: Place, isFavourite: Bool) {
         self.place = place
         self.isFavourite = isFavourite
@@ -127,7 +143,7 @@ class PlaceCardVC: UIViewController {
         view.backgroundColor = .clear
         
         view.addSubviews(views: [dimmingView, containerView])
-        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton, favouriteButton])
+        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton, favouriteButton, directionsButton])
         
         let cardHeight: CGFloat = 300
         
@@ -167,7 +183,13 @@ class PlaceCardVC: UIViewController {
             favouriteButton.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
             favouriteButton.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -12),
             favouriteButton.widthAnchor.constraint(equalToConstant: 30),
-            favouriteButton.heightAnchor.constraint(equalToConstant: 30)
+            favouriteButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            directionsButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            directionsButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+            directionsButton.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            directionsButton.heightAnchor.constraint(equalToConstant: 52)
+
         ])
         
     }
@@ -186,6 +208,11 @@ class PlaceCardVC: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(animateHideAndDismiss))
         dimmingView.addGestureRecognizer(tapGesture)
+        
+        directionsButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.didDirectionTapped?()
+            self?.animateHideAndDismiss()
+        }), for: .touchUpInside)
         
     }
     
