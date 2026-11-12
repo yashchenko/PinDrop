@@ -88,7 +88,7 @@ extension MapVC: MKMapViewDelegate {
             place.id == id
         }) else { return }
         
-        let detailVC = PlaceCardVC(place: place, isFavourite: presenter.isFavourite(place))
+        let detailVC = PlaceCardVC(place: place, isFavourite: presenter.isFavourite(place), distance: presenter.formattedDistance(to: place))
         detailVC.didFavouriteTapped = { [weak self] in
             
             self?.presenter.toggleFavourite(place: place)
