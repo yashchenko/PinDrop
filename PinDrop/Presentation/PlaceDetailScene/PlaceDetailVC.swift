@@ -21,6 +21,8 @@ class PlaceCardVC: UIViewController {
     
     var didDirectionTapped: (() -> ())?
     
+    let distanceText: String?
+    
     
     // MARK: - UI
     
@@ -92,9 +94,20 @@ class PlaceCardVC: UIViewController {
         return button
     }()
     
-    init(place: Place, isFavourite: Bool) {
+    private let addressLabel: UILabel = {
+       
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    init(place: Place, isFavourite: Bool, distance: String? = nil) {
         self.place = place
         self.isFavourite = isFavourite
+        self.distanceText = distance
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .overFullScreen
     }
@@ -143,7 +156,7 @@ class PlaceCardVC: UIViewController {
         view.backgroundColor = .clear
         
         view.addSubviews(views: [dimmingView, containerView])
-        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton, favouriteButton, directionsButton])
+        containerView.addSubviews(views: [titleLabel, categoryLabel, closeButton, favouriteButton, directionsButton, addressLabel])
         
         let cardHeight: CGFloat = 300
         
@@ -188,7 +201,11 @@ class PlaceCardVC: UIViewController {
             directionsButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
             directionsButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             directionsButton.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -24),
-            directionsButton.heightAnchor.constraint(equalToConstant: 52)
+            directionsButton.heightAnchor.constraint(equalToConstant: 52),
+            
+            addressLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
+            addressLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+            addressLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24)
 
         ])
         
@@ -197,7 +214,21 @@ class PlaceCardVC: UIViewController {
     private func setupData() {
         
         titleLabel.text = place.name
-        categoryLabel.text = place.category
+        
+        if let distanceText = distanceText {
+            categoryLabel.text = "\(place.category) • \(distanceText)"
+        } else {
+            
+            categoryLabel.text = place.category
+        }
+    
+        if let address = place.address, !address.isEmpty {
+            addressLabel.text = address
+            addressLabel.isHidden = false
+        } else {
+            
+            addressLabel.isHidden = true
+        }
     }
     
     private func setupGestures() {

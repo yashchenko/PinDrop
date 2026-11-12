@@ -33,7 +33,8 @@ final class PlaceRepository: PlaceRepositoryProtocol {
             
             components?.queryItems = [
                 URLQueryItem(name: "ll", value: "\(coordinate.latitude),\(coordinate.longitude)"),
-                URLQueryItem(name: "limit", value: "10") // Берем 10 ближайших мест
+                URLQueryItem(name: "radius", value: "2000"),
+                URLQueryItem(name: "limit", value: "50") // Берем 10 ближайших мест
                 // Пока мы убрали категории, чтобы 100% получить ответ на карте.
                 // Когда пины появятся, добавим фильтр обратно.
             ]

@@ -249,20 +249,35 @@ final class MapPresenter {
             return
         }
         
-        placeRepo.calculateRoute(from: sourceCoordinate, to: destination.coordinates) { (result) in
-            
+        placeRepo.calculateRoute(from: sourceCoordinate, to: destination.coordinates) { [weak self] result in
             
             DispatchQueue.main.async {
                 
                 switch result {
                 case .failure(let error):
-                    self.presenter?.showError(error.localizedDescription)
+                    self?.presenter?.showError(error.localizedDescription)
                     
                     
                 case .success(let polylines):
-                    self.presenter?.drawRoute(polylines)
+                    self?.presenter?.drawRoute(polylines)
                 }
             }
+        }
+    }
+    
+    func formattedDistance(to place: Place) -> String? {
+        guard let userCoordinate = userCoordinate else { return nil }
+        
+        let userLocation = CLLocation(latitude: userCoordinate.latitude, longitude: userCoordinate.longitude)
+        let placeLocation = CLLocation(latitude: place.coordinates.latitude, longitude: place.coordinates.longitude)
+        let distanceInMeters = userLocation.distance(from: placeLocation)
+        
+        if distanceInMeters < 1000 {
+            return "\(Int(distanceInMeters)) m away"
+        } else {
+            
+            let distanceInKm = distanceInMeters / 1000
+            return String(format: "%.1f km away", distanceInKm)
         }
     }
 }
