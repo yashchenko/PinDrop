@@ -19,6 +19,8 @@ final class MapPresenter {
     private var userCoordinate: CLLocationCoordinate2D?
     private var searchWorkItem: DispatchWorkItem?
     
+    private var isShowingFavouritesOnly = false
+    
     init(location: LocationManagerProtocol, placeRepo: PlaceRepositoryProtocol) {
         self.locationManager = location
         self.placeRepo = placeRepo
@@ -53,6 +55,10 @@ final class MapPresenter {
                 case .success(()):
                     
                     self.favouriteIDs.remove(place.id)
+                    
+                    if self.isShowingFavouritesOnly {
+                        self.showSavedFavouritesOnMap()
+                    }
                 
                 }
         
@@ -278,6 +284,49 @@ final class MapPresenter {
             
             let distanceInKm = distanceInMeters / 1000
             return String(format: "%.1f km away", distanceInKm)
+        }
+    }
+    
+    func toggleFavouritesFilter() {
+        
+        isShowingFavouritesOnly.toggle()
+        
+        presenter?.updateFavouritesFilterState(isActive: isShowingFavouritesOnly)
+        
+        if isShowingFavouritesOnly {
+            
+            showSavedFavouritesOnMap()
+        } else if let coordinate = userCoordinate {
+            fetchPlaces(for: coordinate)
+            
+        } else {
+            
+            requestLocationAndFetchesPlaces()
+        }
+        
+    }
+    
+    func showSavedFavouritesOnMap() {
+        
+        placeRepo.fetchFavourites { [weak self] result in
+            
+            DispatchQueue.main.async {
+                
+                switch result {
+                
+                case .failure(let error):
+                    self?.presenter?.showError(error.localizedDescription)
+                    
+                case .success(let places):
+                    
+                    self?.favouriteIDs = Set(places.map({ (place) -> String in
+                        
+                        return place.id
+                    }))
+                    
+                    self?.presenter?.showPlaces(places)
+                }
+            }
         }
     }
 }

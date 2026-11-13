@@ -58,6 +58,8 @@ final class MapVC: UIViewController {
         customView.locationButton.addTarget(self, action: #selector(centerMapOnUser), for: .touchUpInside)
         
         customView.searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        
+        customView.favouriresButton.addTarget(self, action: #selector(didTapFavourites), for: .touchUpInside)
     }
     
     @objc func centerMapOnUser() {
@@ -72,6 +74,12 @@ final class MapVC: UIViewController {
     @objc func searchTextChanged(_ textField: UITextField) {
         
         presenter.searchQueryChanged(textField.text ?? "")
+    }
+    
+    @objc func didTapFavourites() {
+        
+        customView.mapKitView.removeOverlays(customView.mapKitView.overlays)
+        presenter.toggleFavouritesFilter()
     }
 }
 
@@ -120,6 +128,7 @@ extension MapVC: MKMapViewDelegate {
 }
 
 extension MapVC: MapViewProtocol {
+    
     func showUserLocation(_ coordinate: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         customView.mapKitView.setRegion(region, animated: true)
@@ -174,6 +183,14 @@ extension MapVC: MapViewProtocol {
         
         let edgePaddings = UIEdgeInsets(top: 100, left: 40, bottom: 60, right: 40)
         customView.mapKitView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgePaddings, animated: true)
+        
+    }
+    
+    func updateFavouritesFilterState(isActive: Bool) {
+        let iconView = isActive ? "heart.fill" : "heart"
+        
+        customView.favouriresButton.setImage(UIImage(systemName: iconView), for: .normal)
+        customView.favouriresButton.tintColor = isActive ? .systemRed : .secondaryLabel
         
     }
     

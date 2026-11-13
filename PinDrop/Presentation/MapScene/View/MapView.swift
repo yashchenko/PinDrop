@@ -65,6 +65,19 @@ final class MapView: UIView {
         return table
     }()
     
+    let favouriresButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.backgroundColor = .systemBackground
+        button.tintColor = .secondaryLabel
+        button.layer.cornerRadius = 25
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowRadius = 4
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     
     override init(frame: CGRect) {
@@ -79,7 +92,7 @@ final class MapView: UIView {
     
     func setupUI() {
         
-        let arrayViews = [mapKitView, locationButton, searchBarContainer, suggestionsTableView]
+        let arrayViews = [mapKitView, locationButton, searchBarContainer, suggestionsTableView, favouriresButton]
         searchBarContainer.addSubview(searchTextField)
         addSubviews(views: arrayViews)
         
@@ -108,7 +121,12 @@ final class MapView: UIView {
             locationButton.widthAnchor.constraint(equalToConstant: 50),
             locationButton.heightAnchor.constraint(equalToConstant: 50),
             locationButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            locationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -32)
+            locationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            
+            favouriresButton.widthAnchor.constraint(equalToConstant: 50),
+            favouriresButton.heightAnchor.constraint(equalToConstant: 50),
+            favouriresButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+            favouriresButton.bottomAnchor.constraint(equalTo: locationButton.topAnchor, constant: -16)
         ])
     }
 }
