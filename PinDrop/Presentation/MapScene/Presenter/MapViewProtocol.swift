@@ -21,4 +21,6 @@ protocol MapViewProtocol: AnyObject {
     func focusOnPlace(_ coordinate: CLLocationCoordinate2D)
     
     func drawRoute(_ polyline: MKPolyline)
+    
+    func updateFavouritesFilterState(isActive: Bool)
 }
