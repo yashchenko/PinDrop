@@ -158,7 +158,7 @@ final class PlaceRepository: PlaceRepositoryProtocol {
         }
     }
     
-    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKPolyline, Error>) -> Void) {
+    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKRoute, Error>) -> Void) {
         
         let sourcePlacemark = MKPlacemark(coordinate: source)
         let destinationPlacemark = MKPlacemark(coordinate: destination)
@@ -184,7 +184,7 @@ final class PlaceRepository: PlaceRepositoryProtocol {
                 return
             }
             
-            completion(.success(route.polyline))
+            completion(.success(route))
             
         }
         

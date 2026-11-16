@@ -177,9 +177,12 @@ extension MapVC: MapViewProtocol {
         customView.mapKitView.setRegion(region, animated: true)
     }
     
-    func drawRoute(_ polyline: MKPolyline) {
+    func drawRoute(_ polyline: MKPolyline, travelTime: String) {
         customView.mapKitView.removeOverlays(customView.mapKitView.overlays)
         customView.mapKitView.addOverlay(polyline)
+        
+        customView.routeEtaLabel.text = travelTime
+        customView.routeEtaLabel.isHidden = false
         
         let edgePaddings = UIEdgeInsets(top: 100, left: 40, bottom: 60, right: 40)
         customView.mapKitView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgePaddings, animated: true)

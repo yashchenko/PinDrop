@@ -145,6 +145,7 @@ class PlaceCardVC: UIViewController {
     }
     
     @objc private func didTapFavourite() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         isFavourite.toggle()
         updateFavouriteButtonState()
         didFavouriteTapped?()
