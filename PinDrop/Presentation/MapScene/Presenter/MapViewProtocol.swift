@@ -20,7 +20,7 @@ protocol MapViewProtocol: AnyObject {
     
     func focusOnPlace(_ coordinate: CLLocationCoordinate2D)
     
-    func drawRoute(_ polyline: MKPolyline)
+    func drawRoute(_ polyline: MKPolyline, travelTime: String)
     
     func updateFavouritesFilterState(isActive: Bool)
 }

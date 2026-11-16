@@ -264,8 +264,10 @@ final class MapPresenter {
                     self?.presenter?.showError(error.localizedDescription)
                     
                     
-                case .success(let polylines):
-                    self?.presenter?.drawRoute(polylines)
+                case .success(let route):
+                    let minutes = max(1, Int(ceil(route.expectedTravelTime / 60.0)))
+                    let travelTime = "🚶🏼‍♂️ \(minutes) min walk"
+                    self?.presenter?.drawRoute(route.polyline, travelTime: travelTime)
                 }
             }
         }

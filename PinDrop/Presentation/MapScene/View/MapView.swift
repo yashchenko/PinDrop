@@ -10,10 +10,13 @@ import MapKit
 
 final class MapView: UIView {
     
+    // MARK: - Properties
+    
     let mapKitView: MKMapView = {
         
         let map = MKMapView()
         map.showsUserLocation = true // blue dot showing where user
+        map.pointOfInterestFilter = .excludingAll
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
     }()
@@ -79,6 +82,25 @@ final class MapView: UIView {
         return button
     }()
     
+    let routeEtaLabel: UILabel = {
+       
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.textColor = .label
+        label.backgroundColor = .systemBackground
+        label.textAlignment = .center
+        label.layer.cornerRadius = 18
+        label.layer.masksToBounds = true
+        label.layer.borderWidth = 0.5
+        label.layer.borderColor = UIColor.separator.cgColor
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,9 +112,11 @@ final class MapView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
+    
     func setupUI() {
         
-        let arrayViews = [mapKitView, locationButton, searchBarContainer, suggestionsTableView, favouriresButton]
+        let arrayViews = [mapKitView, locationButton, searchBarContainer, suggestionsTableView, favouriresButton, routeEtaLabel]
         searchBarContainer.addSubview(searchTextField)
         addSubviews(views: arrayViews)
         
@@ -126,7 +150,12 @@ final class MapView: UIView {
             favouriresButton.widthAnchor.constraint(equalToConstant: 50),
             favouriresButton.heightAnchor.constraint(equalToConstant: 50),
             favouriresButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-            favouriresButton.bottomAnchor.constraint(equalTo: locationButton.topAnchor, constant: -16)
+            favouriresButton.bottomAnchor.constraint(equalTo: locationButton.topAnchor, constant: -16),
+            
+            routeEtaLabel.topAnchor.constraint(equalTo: searchBarContainer.bottomAnchor, constant: 12),
+            routeEtaLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            routeEtaLabel.heightAnchor.constraint(equalToConstant: 36),
+            routeEtaLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 140)
         ])
     }
 }

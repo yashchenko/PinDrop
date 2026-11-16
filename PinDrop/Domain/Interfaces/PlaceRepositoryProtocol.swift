@@ -22,5 +22,5 @@ protocol PlaceRepositoryProtocol {
     
     func fetchPlaceSetails(id: String, copletion: @escaping (Result<Place, LocationError>) -> Void)
     
-    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKPolyline, Error>) -> Void)
+    func calculateRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion: @escaping (Result<MKRoute, Error>) -> Void)
 }
